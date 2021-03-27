@@ -73,6 +73,23 @@ To run test electrons on the G4 terminal, use:
 /Fun4All/run 1
 ```
 
+### Getting Compton events with ComRad
+The [ComRad](https://gitlab.com/eic/mceg/comptonRad) package produces Compton events based on initial settings hard coded into the [comrad.f](https://gitlab.com/eic/mceg/comptonRad/-/blob/master/comrad.f) file. 
+- **EB** is the electron beam energy
+- **EPHOT** is the photon energy
+- **SPIN** array allows you to set the spin direction. 
+
+Some examples are given in the comments around where these variables are initialized. Modfiy the file and then recompile. The *main.exe* file that is created will output the events directly to the screen. Pipe it to a file of your choice. The [convert2MILOU](https://gitlab.com/eic/mceg/comptonRad/-/blob/master/convert2MILOU.C) macro takes that file, parses it and creates a faux-MILOU generator text file that can be read in easily by standard EIC frameworks.
+
+To convert the milou text file to a root file that can be read in by fun4all (with the eic cvmfs ENV set up):
+```
+root -l
+gSystem->Load("libeicsmear")
+erhic::DisKinematics::BoundaryWarning=false;
+BuildTree("fauxMILOUfile.ml", ".", -1);
+```
+
+
 ### To run events:
 ```
 root
