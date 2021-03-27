@@ -209,7 +209,7 @@ void Fun4All_G4_IP12Compton(
 		  length *= 100.;
 		  inner_radius_zin *= 100.;
 		  outer_magnet_diameter *= 100.;
-		  angle = (angle/TMath::Pi()*360.)/1000.; // given in mrad
+		  angle = angle/1000 * TMath::RadToDeg(); // given in mrad
 
 		  dipole_field_x *= gFactor;
 		  fieldgradient *= gFactor;//FIXME xcheck if you need this
